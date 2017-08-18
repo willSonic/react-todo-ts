@@ -2,8 +2,8 @@
  * Created by willstreeter on 8/14/17.
  */
 import { createAction, Action } from 'redux-actions';
-import * as ActionTypes from '../../business-layer/constants/action-types';
-import {TodoEntity} from '../../business-layer/models'
+import * as ActionTypes from '../.';
+import {TodoEntity} from '../.'
 
 const addToDo=createAction(
      ActionTypes.ADD_TODO,

@@ -1,35 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
+     <head>
         <meta charset="UTF-8" />
         <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=1">
-        <title>App - Development</title>
+        <title>ToDo(S)</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link href='//fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,900,800,200,100' rel='stylesheet' type='text/css'>
+     </head>
+      <body>
+        <div id="root"></div>
 
-        <!-- iOS -->
-        <meta name="apple-mobile-web-app-title" content="App - Development">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-    </head>
-    <body>
-        <div id="react-root"></div>
-
-        <!-- Populate app's initialState -->
-        <script>
-        window._initialState = {
-            settings: {
-                name: 'Custom App'
-            }
-        }
-        </script>
-
-        <!-- Pass additional info to the app -->
-        <script>
-        window._sharedData = {
-            app_name: 'Custom App (shared)'
-        }
-        </script>
+        <!-- Dependencies -->
+        <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+        <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
 
         <!-- Main -->
-        <script src="/vendor.js"></script>
-        <script src="/app.js"></script>
-    </body>
+        <script src="../bundle.js"></script>
+      </body>
 </html>

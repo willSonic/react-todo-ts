@@ -1,12 +1,13 @@
 /**
  * Created by willstreeter on 8/18/17.
  */
+
+require("!style-loader!css-loader!stylus-loader!./css/main.styl");
+
 import 'react-hot-loader/patch'
 import * as React from "react";
 import {render} from "react-dom";
 import {AppContainer} from "react-hot-loader";
-//import Header from './view-layer/components/Header';
-
 import AppStage from './view-layer/app-stage/AppStage'
 
 const rootEl = document.getElementById("root");

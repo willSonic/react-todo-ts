@@ -1,6 +1,63 @@
-.header
-  background url("./google.png") no-repeat center center
-  background-size 64px
-  box-shadow 0 0 10px rgba(0,0,0,0.5)
-  padding 30px;
-  border-radius bottom (2 * @padding)  // this is nib
+@import "../../../css/styles/style";
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+header
+    height rem-calc(60px)
+    background-color nav-color
+    color noc-color
+    box-shadow 0 0 10px rgba(0,0,0,0.5)
+    top 0
+    left 0
+    right 0;
+    position fixed
+    z-index 10
+    @extend .cf
+    .container
+        display flex
+        justify-content space-between
+        width 100%
+        height 100%
+        box-shadow 0 0 10px rgba(0,0,0,0.5)
+        padding-left rem-calc(10px)
+        padding-right rem-calc(10px)
+        .s-grid-sticky-header-logo
+            width 35%
+        .s-grid-sticky-header-menu
+            width 30%
+        .logo, .menu
+            line-height rem-calc(60px)
+            margin 0
+            font-weight 300
+            font-size rem-calc(26px)
+        .menu
+            text-align right
+            margin-right 10px
+            span
+               margin-right 20px
+        .menu-list
+            list-style-type none
+            .menu-list-item
+                padding-left rem-calc(10)
+                padding-right rem-calc(10)
+                display inline-block
+                padding-top rem-calc(10)
+                a
+                    display inline-block
+                    position relative
+                    padding-bottom rem-calc(10)
+                    font-weight 300
+                    &:after
+                        position absolute
+                        opacity 0
+                        content " "
+                        display block
+                        width 0
+                        height rem-calc(2)
+                        background-color #252525
+                        bottom 0
+                        left 50%
+                        transform translateX(-50%)
+                        transition all .2s
+                    &:hover
+                        &:after
+                            opacity 1
+                            width 100%

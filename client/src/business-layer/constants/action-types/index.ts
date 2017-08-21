@@ -1,0 +1,10 @@
+/**
+ * Created by willstreeter on 8/14/17.
+ */
+
+export const FETCH_PX_BAY_IMAGES  = 'FETCH_PX_BAY_IMAGES';
+export const STORE_PX_BAY_ENTITY = 'STORE_PX_BAY_ENTITY';
+export const GET_PX_BAY_ENTITY = 'GET_PX_BAY_ENTITY';
+export const GET_PX_BAY_ENTITIES = 'GET_PX_BAY_ENTITIES';
+export const HTTP_GET_CALL_STARTED = 'HTTP_GET_CALL_STARTED';
+export const HTTP_GET_CALL_COMPLETED = 'HTTP_GET_CALL_COMPLETED';

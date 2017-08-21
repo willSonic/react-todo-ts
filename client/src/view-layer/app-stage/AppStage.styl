@@ -1,7 +1,37 @@
-.app {
-  font-family: helvetica, arial, sans-serif;
+@import '../../css/styles/style';
 
-  p {
-    background-color: yellow;
-  }
-}
+
+.main
+    background-color darken(steel-white, 5%)
+    padding-top rem-calc(60px)
+    padding-bottom rem-calc(60px)
+    .container
+        width 100%
+        margin 0 auto
+        max-width rem-calc(1200px)
+        padding rem-calc(30px) rem-calc(30px)
+        background-color steel-white
+        position relative
+        .expand-icon,
+        .refresh-icon
+            position absolute
+            font-size rem-calc(22px)
+            padding rem-calc(10px) rem-calc(15px)
+            text-align center
+            background-color color-main-contrast
+            top 0
+            left 0
+            cursor pointer
+            color color-main-light
+        .expand-icon
+            left rem-calc(48px)
+        &.full-width
+            max-width 100%
+        h1
+            font-size rem-calc(36px)
+            margin-top rem-calc(60px)
+            margin-bottom rem-calc(60px)
+            span
+                display inline-block
+                padding-bottom rem-calc(15px)
+                border-bottom rem-calc(5px) solid color-main-contrast

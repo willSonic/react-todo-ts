@@ -1,0 +1,32 @@
+@import "../../../css/styles/style";
+
+footer
+    font-size rem-calc(13px)
+    font-weight 700
+    height rem-calc(60px)
+    background-color noc-color
+    color nav-color
+    box-shadow 10px 0 0 rgba(0,0,0,0.5)
+    bottom 0
+    left 0
+    right 0;
+    position fixed
+    z-index 10
+    @extend .cf
+    .container
+        width 100%
+        height 100%
+        padding-left rem-calc(10px)
+        padding-right rem-calc(10px)
+        .logo, .menu
+            line-height rem-calc(30px)
+            margin 0
+        .logo
+            font-weight 300
+            font-size rem-calc(26px)
+        .menu
+            text-align right
+            .menu-icon-bar
+                display inline-block
+                > .tcon
+                    margin-top rem-calc(20px)

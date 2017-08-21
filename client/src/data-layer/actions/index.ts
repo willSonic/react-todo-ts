@@ -3,11 +3,17 @@
  */
 import { createAction, Action } from 'redux-actions'
 import * as constants from '../../business-layer/constants/action-types';
-import { PixaBayEntity } from '../../business-layer/models';
+import { PixaBayEntity, FlickerEntity } from '../../business-layer/models';
 
 
 const  fetchPxBayImages = createAction(
        constants.FETCH_PX_BAY_IMAGES,
+       (category:string) => ({ category })
+      );
+
+
+const  fetchFlickerImages = createAction(
+       constants.FETCH_FLICKER_IMAGES,
        (category:string) => ({ category })
       );
 
@@ -18,6 +24,11 @@ const  storePxBayEntity = createAction(
       );
 
 
+const  storeFlickerEntity = createAction(
+       constants.STORE_FLICKER_ENTITY,
+       (flickerEntities:FlickerEntity[]) => (flickerEntities)
+      );
+
 
 
 const  getPxBayEntity = createAction(
@@ -26,11 +37,20 @@ const  getPxBayEntity = createAction(
       );
 
 
+const  getFlickerEntity = createAction(
+       constants.GET_FLICKER_ENTITY,
+       (text: string) => ({ text })
+      );
+
 const  getPxBayEntities = createAction(
        constants.GET_PX_BAY_ENTITIES,
         () => { }
       );
 
+const  getFlickerEntities = createAction(
+       constants.GET_FLICKER_ENTITIES,
+        () => { }
+      );
 
 
 const  httpCallStarted = createAction(
@@ -47,9 +67,13 @@ const  httpCallCompleted = createAction(
 
 export {
   fetchPxBayImages,
+  fetchFlickerImages,
   storePxBayEntity,
+  storeFlickerEntity,
   getPxBayEntity,
+  getFlickerEntity,
   getPxBayEntities,
+  getFlickerEntities,
   httpCallStarted,
   httpCallCompleted
 }

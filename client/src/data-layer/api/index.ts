@@ -1,9 +1,10 @@
 /**
  * Created by willstreeter on 8/20/17.
  */
-import { PixaBayEntity } from '../../business-layer/models';
+import { PixaBayEntity, FlickerEntity } from '../../business-layer/models';
 import  'ts-promise';
-const baseURL = 'https://pixabay.com/api/?key=5167438-bfac80315fa01ec4da1031d88&q=';
+const pixAbayBaseURL = 'https://pixabay.com/api/?key=5167438-bfac80315fa01ec4da1031d88&q=';
+const flickerBaseURL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ee9f4512c2a54b3b2f09cb2000ce4a89&text=';
 
 // { "previewHeight":99,
 //   "likes":125,
@@ -25,23 +26,51 @@ const baseURL = 'https://pixabay.com/api/?key=5167438-bfac80315fa01ec4da1031d88&
 //    "userImageURL":"https://cdn.pixabay.com/user/2016/02/04/14-57-52-700_250x250.jpg",
 //    "imageHeight":3064}
 
+
 const mapToPxBabyImage = (pxBayResult:any): PixaBayEntity[] => pxBayResult['hits'].map((image)=> <PixaBayEntity>(image));
 
+//   farm:number;
+//   id:string
+//   isfamily:boolean;
+//   isfriend:boolean;
+//   ispublic:boolean;
+//   owner:string;
+//   secret:string;
+//   server:string;
+//   title:string;
 
-async function getCategories(category:any){
-    var result = await fetch(baseURL+category.text+'&image_type=photo')
+
+const mapToFlickerImage = (flickerResults:any): FlickerEntity[] => flickerResults['photos'].photo.map((image)=><FlickerEntity>(image));
+
+async function getPxABayCategories(value:any){
+    var result = await fetch(pixAbayBaseURL+value.category+'&image_type=photo')
                  .then(response => response.json())
                  .then( res => mapToPxBabyImage(res));
-    console.log('result =',result)
+    return result;
+}
+async function getFlickerCategories(value:any){
+    var result = await fetch(flickerBaseURL+value.category+'&format=json&nojsoncallback=1')
+                 .then(response => response.json())
+                 .then( res =>  mapToFlickerImage(res));
     return result;
 }
 
+
 const fetchPxBayEntityAsync = (category:string)=>{
-var pxBayEntities = getCategories(category);
+var pxBayEntities = getPxABayCategories(category);
   return pxBayEntities;
 };
 
 
-export const pxBayApi = {
-  fetchPxBayEntityAsync
+const fetchFlickerEntitiesAsync = (category:string)=>{
+var flickerEntities = getFlickerCategories(category);
+  return flickerEntities;
 };
+
+
+export const imageAPIs = {
+  fetchPxBayEntityAsync,
+  fetchFlickerEntitiesAsync
+};
+
+

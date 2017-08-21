@@ -1,8 +1,11 @@
 import * as React from "react";
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { PixaBayEntity } from '../../business-layer/models';
-import { getPxBayEntities, fetchPxBayImages }   from '../../data-layer/actions';
+import { PixaBayEntity, FlickerEntity } from '../../business-layer/models';
+import { getPxBayEntities, fetchPxBayImages, getFlickerEntities, fetchFlickerImages }   from '../../data-layer/actions';
+import pxBayReducer from '../../data-layer/reducers';
 import Header from '../component/Header';
+import ImageRow from '../component/ImageRow';
 import Footer from '../component/Footer';
 
 require("!style-loader!css-loader!stylus-loader!./AppStage.styl");
@@ -15,23 +18,22 @@ interface State {
 }
 
 // extends React.Props<GeoPage>
-interface Props  extends React.Props<AppStage>{
-    imageInput?:string;
-    pxBayEntities?: Array<PixaBayEntity>;
-    getImagesByCategory?: (category:string) => void;
+interface AppStageProps  extends React.Props<AppStage>{
+    imageInput? : string;
+    pxBayEntities? : Array<PixaBayEntity>;
+    flickerEntities? : Array<FlickerEntity>;
+    getImagesByCategory? : (category:string) => void;
     loadImages? : () => void;
 }
 
-class AppStage extends React.Component<Props, State> {
+class AppStage extends React.Component<AppStageProps, State> {
 
-    constructor(props : Props) {
+    constructor(props : AppStageProps) {
         super(props);
         this.state = Object.assign({imagePxInput:''});
     }
 
-    public componentDidMount() {
-     this.props.loadImages();
-    }
+
 
     public getImages(event:any){
          event.preventDefault();
@@ -50,12 +52,10 @@ class AppStage extends React.Component<Props, State> {
                     <Header
                         value={this.props.imageInput}
                         onChange={this.updateCategoryRequest.bind(this)}
-                        onSearch={this.getImages.bind(this)}
-                    > </Header>
+                        onSearch={this.getImages.bind(this)}>
+                   </Header>
                     <div className="main">
-                        <h1>Hello World!</h1>
-                        <p>First, let’s open one of the Meteor project templates which uses sGrid helper classes: promo.html. You can see here how it is used and then let’s open the main style.styl file of the same app. As you can see, we’ve just imported all three sGrid .styl files including the file with classes which we’ve used in the promo template. Promo template uses some responsive sGrid classes like ‘s-grid-cell-sm-12 s-grid-cell-md-10’ I am sure that you know it from, for example, Bootstrap grid. This is the same. We have 12 columns on the small screen and 10 on the bigger one. You can copy and overwrite the config file from s-grid-settings.styl file.</p>
-                        <img src={reactLogo}/>
+                          <ImageRow  flickers= { this.props.flickerEntities } ></ImageRow>
                     </div>
                     <Footer> </Footer>
                 </div>);
@@ -65,9 +65,9 @@ class AppStage extends React.Component<Props, State> {
 // Container
 
 const mapStateToProps =( (state:any) => {
-    //console.log('mapStateToProps = ', state.geoReducer.zips)
     return {
-        pxBayEntities:state.pxBayReducers.ids.map((ids)=>state.pxBayReducers.entities[ids])
+        pxBayEntities:state.pxBayReducer.ids.map((id)=>state.pxBayReducer.entities[id]),
+        flickerEntities:state.flickerReducer.ids.map((id)=>state.flickerReducer.entities[id])
     }
 
 });
@@ -75,14 +75,18 @@ const mapStateToProps =( (state:any) => {
 
 const mapDispatchToProps = (dispatch:any) => {
   return {
-          getImagesByCategory: (value:string) => {return dispatch(fetchPxBayImages(value))},
-          loadImages: () => {return dispatch(getPxBayEntities())}
+          getImagesByCategory: (value:string) => {return dispatch(fetchFlickerImages(value))}
       }
+};
+
+const mergeProps = (stateProps: Object, dispatchProps: Object, ownProps: Object)=> {
+  return Object.assign({}, ownProps, stateProps, dispatchProps);
 }
 
 const AppContainerPage = connect(
                                    mapStateToProps
                                   ,mapDispatchToProps
+                                  ,mergeProps
                                 )(AppStage);
 
 

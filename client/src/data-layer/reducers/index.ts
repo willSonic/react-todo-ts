@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
 
 import pxBayReducer from './pxBayReducer';
+import flickerReducer from './flickerReducer';
 
-const pxBayReducers = combineReducers({
-  pxBayReducer
+const imageReducers = combineReducers({
+  pxBayReducer,
+  flickerReducer
+
 });
 
-export default pxBayReducers;
+export default imageReducers;

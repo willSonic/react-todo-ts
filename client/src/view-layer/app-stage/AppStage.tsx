@@ -55,7 +55,7 @@ class AppStage extends React.Component<AppStageProps, State> {
                         onSearch={this.getImages.bind(this)}>
                    </Header>
                     <div className="main">
-                          <ImageRow  flickers= { this.props.flickerEntities } ></ImageRow>
+                       <ImageRow  flickers={this.props.flickerEntities} ></ImageRow>
                     </div>
                     <Footer> </Footer>
                 </div>);
@@ -67,7 +67,10 @@ class AppStage extends React.Component<AppStageProps, State> {
 const mapStateToProps =( (state:any) => {
     return {
         pxBayEntities:state.pxBayReducer.ids.map((id)=>state.pxBayReducer.entities[id]),
-        flickerEntities:state.flickerReducer.ids.map((id)=>state.flickerReducer.entities[id])
+        flickerEntities:state.flickerReducer.ids.map((id)=> {
+                 if(state.flickerReducer.entities[id])
+                     return state.flickerReducer.entities[id]
+        })
     }
 
 });

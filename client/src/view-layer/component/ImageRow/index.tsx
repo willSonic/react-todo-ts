@@ -18,16 +18,20 @@ export default class ImageRow extends React.Component<ImageProps, State> {
 
   constructor(props : ImageProps){
         super(props);
-
   }
-    public mapPhotos(photoList:Array<any>){
-         console.log('photoList ==',photoList)
-         return photoList.map((photo)=> {
-              const url = `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_s.jpg`;
-              return (
-                <Image urlSRC={url} key={photo.id} />
-              )
+
+    public mapPhotos(photoList:Array<FlickerEntity>){
+        if(photoList.length>0){
+            return photoList.map((photo)=> {
+                if(photo){
+                    console.log('photo ==', photo)
+                    const url = `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_s.jpg`;
+                    return (
+                        <Image urlSRC={url} key={photo.id} />
+                    )
+                }
             });
+        }
     }
 
 

@@ -26,7 +26,10 @@ const  storePxBayEntity = createAction(
 
 const  storeFlickerEntity = createAction(
        constants.STORE_FLICKER_ENTITY,
-       (flickerEntities:FlickerEntity[]) => (flickerEntities)
+       (flickerEntities:FlickerEntity[]) =>{
+             console.log(' storeFlickerEntity  flickerEntities =', flickerEntities)
+             return flickerEntities
+       }
       );
 
 

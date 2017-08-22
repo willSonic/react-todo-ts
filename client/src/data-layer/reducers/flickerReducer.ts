@@ -2,13 +2,13 @@ import { handleActions, Action } from 'redux-actions';
 import { FlickerEntity  } from '../../business-layer/models';
 import * as constants from '../../business-layer/constants/action-types';
 
-export  interface State {
+export interface State {
   ids: string[];
   entities: { [id: string]: FlickerEntity };
 }
 
 const initialState: State = {
-  ids: [],
+  ids:[],
   entities: {}
 };
 
@@ -26,8 +26,8 @@ export default handleActions<State, FlickerEntity>({
           });
         })
 
-      return {
-        ids: [ ...state.ids,newImagesIds ],
+      return{
+        ids:  state.ids.length>0? [ ...state.ids, ...newImagesIds ] : [...newImagesIds],
         entities: Object.assign({}, state.entities, newImagesEntities)
       };
   },

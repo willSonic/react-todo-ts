@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { FlickerEntity, PixaBayEntity } from '../../../business-layer/models';
-import Image from '../Image'
-import Loader from '../Loader';
+import Image from '../Image';
 
 
 interface ImageProps extends React.Props<ImageRow> {
      pixaBayEntities?: PixaBayEntity[];
      flickers? : Array<FlickerEntity>;
+     onImageView?: (event:any) => any;
 }
 
 interface State{
@@ -16,18 +15,21 @@ interface State{
 
 export default class ImageRow extends React.Component<ImageProps, State> {
 
-  constructor(props : ImageProps){
+   constructor(props : ImageProps){
         super(props);
-  }
+   }
 
     public mapPhotos(photoList:Array<FlickerEntity>){
         if(photoList.length>0){
             return photoList.map((photo)=> {
                 if(photo){
-                    console.log('photo ==', photo)
                     const url = `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_s.jpg`;
                     return (
-                        <Image urlSRC={url} key={photo.id} />
+                        <Image
+                            id={photo.id}
+                            callbackParent={this.props.onImageView}
+                            urlSRC={url}
+                            key={photo.id}/>
                     )
                 }
             });
@@ -37,7 +39,7 @@ export default class ImageRow extends React.Component<ImageProps, State> {
 
    public render() {
        return (
-          <div>
+          <div className="content">
                {this.mapPhotos(this.props.flickers)}
           </div>
        );

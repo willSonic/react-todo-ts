@@ -29,19 +29,21 @@ export default class Header extends React.Component<HeaderProps, State>  {
   public render() {
      return  <header>
                <div className="container">
-                    <div className="s-grid-sticky-header-logo">
+                    <div className="header-logo">
                         <h4 className="logo"> Images On Travel</h4>
                     </div>
-                    <div className="s-grid-sticky-header-menu">
-                        <div className="menu">
-                            <span className='glyphicon glyphicon-search'  onClick={this.props.onSearch}  />
+                    <div className="header-menu">
+                        <form className="menu">
+                            <button type="submit" onClick={this.props.onSearch} >
+                                <span className='glyphicon glyphicon-search'   />
+                            </button>
                              <SingleInput
                                  name="categoryCode"
                                  placeholder="category"
                                  label="categoryCode"
                                  value={this.props.value}
                                  onChange={this.props.onChange}/>
-                        </div>
+                        </form>
                     </div>
                </div>
              </header>

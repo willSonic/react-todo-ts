@@ -5,6 +5,7 @@ import { PixaBayEntity, FlickerEntity } from '../../business-layer/models';
 import { getPxBayEntities, fetchPxBayImages, getFlickerEntities, fetchFlickerImages }   from '../../data-layer/actions';
 import pxBayReducer from '../../data-layer/reducers';
 import Header from '../component/Header';
+import Modal from  '../component/Modal';
 import ImageRow from '../component/ImageRow';
 import Footer from '../component/Footer';
 
@@ -15,6 +16,7 @@ const reactLogo = require("./react.svg");
 interface State {
    imagePxInput:string;
    indexCount:number;
+   modalIsOpen:boolean;
 }
 
 // extends React.Props<GeoPage>
@@ -30,10 +32,15 @@ class AppStage extends React.Component<AppStageProps, State> {
 
     constructor(props : AppStageProps) {
         super(props);
-        this.state = Object.assign({imagePxInput:''});
+        this.state = Object.assign({imagePxInput:'', modalIsOpen:false});
     }
 
-
+    public toggleModal(event:any){
+        console.log(' toggleModal =',event.target)
+        this.setState({
+            modalIsOpen: !this.state.modalIsOpen
+        });
+    }
 
     public getImages(event:any){
          event.preventDefault();
@@ -48,16 +55,23 @@ class AppStage extends React.Component<AppStageProps, State> {
     }
 
    public render() {
-        return (<div className="app">
+        return (<div className="react-root">
                     <Header
                         value={this.props.imageInput}
                         onChange={this.updateCategoryRequest.bind(this)}
                         onSearch={this.getImages.bind(this)}>
                    </Header>
                     <div className="main">
-                       <ImageRow  flickers={this.props.flickerEntities} ></ImageRow>
+                        <div className="contaionImageViewner">
+                           <ImageRow  onImageView={this.toggleModal.bind(this)}
+                                      flickers={this.props.flickerEntities} ></ImageRow>
+                        </div>
                     </div>
                     <Footer> </Footer>
+                    <Modal show={this.state.modalIsOpen}
+                           onClose={this.toggleModal}>
+                        Here's some content for the modal
+                    </Modal>
                 </div>);
     }
 }

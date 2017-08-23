@@ -7,7 +7,13 @@ import * as React from 'react';
 
 interface ImageProps extends React.Props<Image> {
    urlSRC? :string;
+       id? :string;
+     key?  :string;
+    callbackParent? :(event:any) => any;
+
+
 }
+
 export default class Image extends React.Component<ImageProps, {}> {
   constructor(props : ImageProps){
         super(props);
@@ -16,7 +22,7 @@ export default class Image extends React.Component<ImageProps, {}> {
    public render() {
        return (
             <div>
-              <img  alt="" src={this.props.urlSRC} />
+              <img  id={this.props.id} onClick={this.props.callbackParent} key={this.props.key} alt="" src={this.props.urlSRC} />
             </div>
        )
   }
